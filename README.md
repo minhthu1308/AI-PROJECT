@@ -14,7 +14,7 @@ Hệ thống sử dụng cơ chế suy luận dựa trên luật (Rule-Based Rea
 ## 3. Chức năng chính
 - Tiếp nhận và kiểm tra tính hợp lệ của dữ liệu đầu vào
 - Xây dựng và quản lý tập luật IF-THEN
-- Thực hiện suy luận dựa trên các luật đã định nghãi
+- Thực hiện suy luận dựa trên các luật đã định nghĩa 
 - Phân loại kết quả thành các mức độ:
     - SAFE: an toàn
     - WARNING: cảnh báo
@@ -30,32 +30,36 @@ Hệ thống sử dụng cơ chế suy luận dựa trên luật (Rule-Based Rea
 
 ## 5. Cấu trúc dự án
 ```text
-AI-PROJECT/
-├── src/                    # Source code
-│   ├── main.py             # Integration
-│   ├── validation.py       # Input validation
-│   ├── rules.py            # Knowledge Base
-│   ├── inference.py        # Inference Engine
-│   └── interface.py        # User Interface
-│
-├── tests/                  # Testing
-│   ├── test_validation.py
-│   ├── test_inference.py
-│   ├── test_integration.py
-│   └── test_data/
-│       └── test_cases.csv
-│
-├── docs/                   # Project documentation
-│   ├── project_documentation.md
-│   ├── system_requirements.md
-│   ├── rule_specification.md
-│   ├── threshold_specification.md
-│   ├── module_contracts.md
-│   └── test_documentation.md
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
+    AI-PROJECT/
+    │
+    ├── README.md
+    ├── LICENSE
+    ├── .gitignore
+    ├── requirements.txt
+    │
+    ├── src/
+    │   ├── __init__.py
+    │   ├── main.py
+    │   ├── validation.py
+    │   ├── rules.py
+    │   ├── inference.py
+    │   └── interface.py
+    │
+    ├── tests/
+    │   ├── test_validation.py
+    │   ├── test_inference.py
+    │   ├── test_integration.py
+    │   └── test_data/
+    │       └── test_cases.csv
+    │
+    └── docs/
+        ├── project_documentation.md
+        ├── system_requirements.md
+        ├── rule_specification.md
+        ├── threshold_specification.md
+        ├── module_contracts.md
+        ├── test_documentation.md
+        └── diagrams/
 ```
 
 Chi tiết về giao diện hàm, cấu trúc dữ liệu trả về và trách nhiệm của từng module được trình bày tại:
