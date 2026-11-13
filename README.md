@@ -29,7 +29,38 @@ Hệ thống sử dụng cơ chế suy luận dựa trên luật (Rule-Based Rea
 - Biểu diễn các luật xây dựng: IF-THEN Rules
 
 ## 5. Cấu trúc dự án
+```text
+AI-PROJECT/
+├── src/                    # Source code
+│   ├── main.py             # Integration
+│   ├── validation.py       # Input validation
+│   ├── rules.py            # Knowledge Base
+│   ├── inference.py        # Inference Engine
+│   └── interface.py        # User Interface
+│
+├── tests/                  # Testing
+│   ├── test_validation.py
+│   ├── test_inference.py
+│   ├── test_integration.py
+│   └── test_data/
+│       └── test_cases.csv
+│
+├── docs/                   # Project documentation
+│   ├── project_documentation.md
+│   ├── system_requirements.md
+│   ├── rule_specification.md
+│   ├── threshold_specification.md
+│   ├── module_contracts.md
+│   └── test_documentation.md
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
 
+Chi tiết về giao diện hàm, cấu trúc dữ liệu trả về và trách nhiệm của từng module được trình bày tại:
+
+- [Quy định phối hợp giữa các module](docs/module_contracts.md)
 ## 6. Quy trình làm việc nhóm 
 - Làm việc theo nhánh riêng theo từng chức năng được phân công
 - Cập nhật mã nguồn mới nhất từ nhánh phát triển trước khi bắt đầu công việc
