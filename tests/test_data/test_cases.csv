@@ -1,0 +1,27 @@
+test_id,speed,distance,expected_d_min,expected_status,expected_rule,test_category,explanation
+TC01,0,0,0,DANGER,R01,Ngoại lệ speed=0,"Ngoại lệ speed=0, distance=0."
+TC02,0,5,0,WARNING,R03,Ngoại lệ speed=0,D_min=0; 0<distance≤10.
+TC03,0,10,0,WARNING,R03,Ngoại lệ speed=0,Đúng biên trên của WARNING khi speed=0.
+TC04,0,10.01,0,SAFE,R04,Ngoại lệ speed=0,Lớn hơn D_min+10.
+TC05,30,17.49,17.5,DANGER,R02,Hợp lệ - biên/ngưỡng,D_min=17.5; distance thấp hơn D_min.
+TC06,30,17.5,17.5,WARNING,R03,Hợp lệ - biên/ngưỡng,Đúng D_min.
+TC07,30,27.5,17.5,WARNING,R03,Hợp lệ - biên/ngưỡng,Đúng D_min+10.
+TC08,30,27.51,17.5,SAFE,R04,Hợp lệ - biên/ngưỡng,Vượt D_min+10.
+TC09,59.99,34.99,34.994167,DANGER,R02,Biên tốc độ,Kiểm tra ngay dưới mốc 60 km/h; D_min≈34.9942.
+TC10,60,34.99,35,DANGER,R02,Biên tốc độ,"Tại đúng 60 km/h, D_min=35 m."
+TC11,60,35,35,WARNING,R03,Hợp lệ - biên/ngưỡng,Tại đúng D_min ở 60 km/h.
+TC12,60,45,35,WARNING,R03,Hợp lệ - biên/ngưỡng,Tại đúng D_min+10 ở 60 km/h.
+TC13,60,45.01,35,SAFE,R04,Hợp lệ - biên/ngưỡng,Vượt D_min+10 ở 60 km/h.
+TC14,80,55,55,WARNING,R03,Biên tốc độ,"Tại đúng 80 km/h, thuộc khoảng 60<V≤80; D_min=55."
+TC15,80.01,69.99,70,DANGER,R02,Biên tốc độ,Ngay trên 80 km/h chuyển sang D_min=70.
+TC16,100,80,70,WARNING,R03,Biên tốc độ,"Tại 100 km/h, thuộc khoảng 80<V≤100; D_min=70."
+TC17,100.01,99.99,100,DANGER,R02,Biên tốc độ,Ngay trên 100 km/h chuyển sang D_min=100.
+TC18,120,110,100,WARNING,R03,Biên tốc độ,Tại giới hạn trên 120 km/h; D_min=100.
+TC19,120.01,110,ERROR,ERROR,Validation,Biên tốc độ,Tốc độ vượt phạm vi mô phỏng.
+TC20,-1,10,ERROR,ERROR,Validation,Đầu vào không hợp lệ,Speed âm.
+TC21,40,-0.1,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance âm.
+TC22,abc,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed không chuyển được sang float.
+TC23,40,NaN,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (NaN).
+TC24,40,Infinity,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (Infinity).
+TC25,,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed để trống.
+TC26,40,,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance để trống.
