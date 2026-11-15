@@ -1,8 +1,3 @@
-"""Suy luận cảnh báo va chạm (TV3).
-
-Dữ liệu đưa vào các hàm ở đây phải đã qua validate_input().
-"""
-
 from src.rules import DELTA, MAX_SPEED, RULES
 
 
@@ -43,14 +38,10 @@ def evaluate_collision(speed, distance):
     distance = float(distance)
     d_min = calculate_d_min(speed)
 
-    # R01: trường hợp đặc biệt
     if speed == 0 and distance == 0:
         return _build_result("R01", 0.0)
-    # R02: d < D_min
     if distance < d_min:
         return _build_result("R02", d_min)
-    # R03: D_min <= d <= D_min + 10
     if distance <= d_min + DELTA:
         return _build_result("R03", d_min)
-    # R04: d > D_min + 10
     return _build_result("R04", d_min)
