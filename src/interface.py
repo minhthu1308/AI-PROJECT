@@ -31,7 +31,7 @@ class CollisionWarningApp:
         self.on_submit = on_submit
 
         root.title("Hệ thống cảnh báo va chạm")
-        root.geometry("460x470")
+        root.geometry("460x520")
         root.resizable(False, False)
 
         self.speed_var = tk.StringVar()
@@ -39,7 +39,8 @@ class CollisionWarningApp:
         self.status_var = tk.StringVar(value="—")
         self.message_var = tk.StringVar(value="Chưa có kết quả.")
         self.recommendation_var = tk.StringVar(value="—")
-        self.extra_var = tk.StringVar(value="")
+        self.rule_id_var = tk.StringVar(value="—")
+        self.d_min_var = tk.StringVar(value="—")
 
         self._build_ui()
 
@@ -92,7 +93,12 @@ class CollisionWarningApp:
         ttk.Label(result, text="Khuyến nghị:", font=("Segoe UI", 9, "bold")).pack(anchor="w")
         ttk.Label(result, textvariable=self.recommendation_var, wraplength=400, justify="left").pack(anchor="w", pady=(0, 8))
 
-        ttk.Label(result, textvariable=self.extra_var, foreground="#607d8b").pack(anchor="w")
+        details = ttk.Frame(result)
+        details.pack(fill="x", pady=(4, 0))
+        ttk.Label(details, text="Mã luật (rule_id):", font=("Segoe UI", 9, "bold")).grid(row=0, column=0, sticky="w")
+        ttk.Label(details, textvariable=self.rule_id_var).grid(row=0, column=1, sticky="w", padx=(8, 0))
+        ttk.Label(details, text="Khoảng cách tham chiếu (d_min):", font=("Segoe UI", 9, "bold")).grid(row=1, column=0, sticky="w")
+        ttk.Label(details, textvariable=self.d_min_var).grid(row=1, column=1, sticky="w", padx=(8, 0))
 
         # Phím tắt
         self.root.bind("<Return>", lambda _e: self.submit())
@@ -125,7 +131,8 @@ class CollisionWarningApp:
         self.status_var.set("—")
         self.message_var.set("Chưa có kết quả.")
         self.recommendation_var.set("—")
-        self.extra_var.set("")
+        self.rule_id_var.set("—")
+        self.d_min_var.set("—")
         self.status_label.config(bg=DEFAULT_COLOR)
         self.speed_entry.focus_set()
 
@@ -143,13 +150,13 @@ class CollisionWarningApp:
         self.recommendation_var.set(recommendation)
         self.status_label.config(bg=STATUS_COLORS.get(status, DEFAULT_COLOR))
 
-        # Các trường tùy chọn mà TV3 có thể bổ sung
-        extras = []
-        if result.get("rule_id") is not None:
-            extras.append(f"Luật: {result['rule_id']}")
-        if result.get("d_min") is not None:
-            extras.append(f"D_min: {result['d_min']}")
-        self.extra_var.set("   |   ".join(extras))
+        # rule_id và d_min là trường bắt buộc khi evaluate_collision() trả kết quả.
+        # Với kết quả ERROR (dữ liệu không hợp lệ) có thể không có hai trường này
+        # nên hiển thị "—" thay vì báo lỗi.
+        rule_id = result.get("rule_id")
+        d_min = result.get("d_min")
+        self.rule_id_var.set("—" if rule_id is None else str(rule_id))
+        self.d_min_var.set("—" if d_min is None else str(d_min))
 
 
 def run_app(on_submit):
@@ -157,7 +164,8 @@ def run_app(on_submit):
 
     Args:
         on_submit: callback on_submit(speed, distance) -> dict
-            (dict có tối thiểu: status, message, recommendation).
+            (dict gồm 5 trường: status, message, recommendation, rule_id, d_min;
+            riêng kết quả ERROR có thể chỉ có 3 trường đầu).
     """
     root = tk.Tk()
     CollisionWarningApp(root, on_submit)
