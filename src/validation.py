@@ -1,5 +1,3 @@
-"""Kiểm tra dữ liệu đầu vào (TV3)."""
-
 import math
 
 from src.rules import MAX_SPEED
@@ -38,7 +36,6 @@ def validate_input(speed, distance):
     try:
         distance_value = _to_float(distance)
     except ValueError:
-        # TODO: xác nhận chuỗi lỗi cho distance với TV1
         return _invalid("invalid distance value.")
     if distance_value < 0:
         return _invalid("invalid distance value.")
