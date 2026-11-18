@@ -48,18 +48,14 @@ Hệ thống sử dụng cơ chế suy luận dựa trên luật (Rule-Based Rea
     ├── tests/
     │   ├── test_validation.py
     │   ├── test_inference.py
-    │   ├── test_integration.py
+    │   ├── test_main.py
     │   └── test_data/
     │       └── test_cases.csv
     │
     └── docs/
-        ├── project_documentation.md
-        ├── system_requirements.md
-        ├── rule_specification.md
-        ├── threshold_specification.md
-        ├── module_contracts.md
-        ├── test_documentation.md
-        └── diagrams/
+       ├── module_contracts.md
+       ├── test_documentation.md
+       └── rule_specification.md
 ```
 
 Chi tiết về giao diện hàm, cấu trúc dữ liệu trả về và trách nhiệm của từng module được trình bày tại:
@@ -73,3 +69,68 @@ Chi tiết về giao diện hàm, cấu trúc dữ liệu trả về và trách 
 - Tạo Pull Request để kiểm tra mã nguồn trước khi hợp nhất
 - Thống nhất cấu trúc thư mục và quy ước lập trình toàn nhóm 
 
+
+## 7. Hướng dẫn cài đặt và chạy chương trình
+
+### 7.1. Yêu cầu môi trường
+
+- Python 3.13 (khuyến nghị).
+- Git.
+- Tkinter (được hỗ trợ trong bản cài đặt Python).
+- pytest (được khai báo trong `requirements.txt`).
+
+### 7.2. Cài đặt dự án
+
+Clone repository:
+
+```bash
+git clone https://github.com/minhthu1308/AI-PROJECT.git
+cd AI-PROJECT
+```
+
+Cài đặt các thư viện cần thiết:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 7.3. Chạy chương trình
+
+Từ thư mục gốc của dự án, chạy:
+
+```bash
+python -m src.main
+```
+
+Chương trình khởi chạy giao diện Tkinter, cho phép người dùng nhập tốc độ (km/h) và khoảng cách (m), sau đó hiển thị kết quả cảnh báo.
+
+## 8. Hướng dẫn kiểm thử
+
+### 8.1. Công cụ kiểm thử
+
+Dự án sử dụng `pytest` để thực hiện kiểm thử tự động.
+
+### 8.2. Chạy kiểm thử
+
+Từ thư mục gốc của dự án, chạy:
+
+```bash
+python -m pytest tests/ -v -ra
+```
+
+### 8.3. Phạm vi kiểm thử
+
+- `test_validation.py`: Kiểm tra tính hợp lệ của dữ liệu đầu vào.
+- `test_inference.py`: Kiểm tra tính toán D_min và các luật R01–R04.
+- `test_main.py`: Kiểm tra điều phối và tích hợp giữa Validation, Inference và Main.
+
+Các trường hợp kiểm thử bao gồm:
+- Dữ liệu hợp lệ.
+- Dữ liệu không hợp lệ.
+- Các giá trị biên.
+- Trường hợp đặc biệt R01.
+- Xử lý lỗi và kết quả không đúng cấu trúc.
+
+Bộ dữ liệu kiểm thử được lưu trong `tests/test_data/test_cases.csv`.
+
+Chi tiết xem tại [Tài liệu kiểm thử](docs/test_documentation.md).
