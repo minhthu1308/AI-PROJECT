@@ -100,6 +100,7 @@ def test_evaluate_collision(
     assert result["rule_id"] == expected_rule
 
     # Kiểm tra khoảng cách an toàn tối thiểu
+    assert isinstance(result["d_min"], float)
     assert result["d_min"] == pytest.approx(expected_d_min)
 
     # Kiểm tra nội dung thông báo
