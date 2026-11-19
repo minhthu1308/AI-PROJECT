@@ -225,7 +225,7 @@ Các trường dữ liệu:
 | TC12 | 60 | 45 | WARNING | R03 | 35 |
 | TC13 | 60 | 45.01 | SAFE | R04 | 35 |
 | TC14 | 80 | 55 | WARNING | R03 | 55 |
-| TC15 | v80.01 | 69.99 | DANGER | R02 | 70 |
+| TC15 | 80.01 | 69.99 | DANGER | R02 | 70 |
 | TC16 | 100 | 80 | WARNING | R03 | 70 |
 | TC17 | 100.01 | 99.99 | DANGER | R02 | 100 |
 | TC18 | 120 | 110 | WARNING | R03 | 100 | 
