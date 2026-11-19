@@ -82,5 +82,3 @@ Kết quả kiểm thử được thực hiện bằng pytest.
 - Phiên bản Python: 3.13.5.
 - Phiên bản pytest: 9.0.2.
 - Commit kiểm thử: `<commit SHA>`.
-
-![Kết quả chạy pytest](evidence/pytest_results.png)
