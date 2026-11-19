@@ -1,8 +1,7 @@
 import pytest
 from unittest.mock import patch
 
-# main.py import validation.py và inference.py (TV3) ở đầu file.
-# Nếu TV3 chưa hoàn thành, toàn bộ file test này sẽ bị bỏ qua (hãy chạy `pytest -rs` để thấy).
+# Bỏ qua toàn bộ file test nếu module src.main hoặc các thành phần phụ thuộc chưa sẵn sàng.
 main_module = pytest.importorskip("src.main")
 handle_evaluate = main_module.handle_evaluate
 
@@ -29,7 +28,7 @@ def assert_error_result(result):
 
 
 # ==================================================
-# TEST 1: LUỒNG ĐIỀU PHỐI BẰNG MOCK (ĐỘC LẬP VỚI LOGIC TV3)
+# TEST 1: LUỒNG ĐIỀU PHỐI BẰNG MOCK
 # ==================================================
 
 def test_invalid_input_stops_before_inference():
@@ -115,12 +114,12 @@ def test_inference_raises_exception():
 
 
 @pytest.mark.parametrize("bad_inference", [
-    {"status": "SAFE"},                                   # thiếu nhiều trường
-    {k: v for k, v in VALID_INFERENCE.items() if k != "d_min"},  # thiếu d_min
+    {"status": "SAFE"},                                          # thiếu nhiều trường
+    {k: v for k, v in VALID_INFERENCE.items() if k != "d_min"},    # thiếu d_min
     {k: v for k, v in VALID_INFERENCE.items() if k != "rule_id"},  # thiếu rule_id
-    {**VALID_INFERENCE, "status": "UNKNOWN"},             # status ngoài SAFE/WARNING/DANGER
-    None,                                                 # không phải dict
-    "WARNING",                                            # không phải dict
+    {**VALID_INFERENCE, "status": "UNKNOWN"},                      # status ngoài SAFE/WARNING/DANGER
+    None,                                                          # không phải dict
+    "WARNING",                                                     # không phải dict
 ])
 def test_malformed_inference_result_returns_error(bad_inference):
     """Inference trả kết quả sai cấu trúc -> ERROR."""
@@ -145,8 +144,7 @@ def test_malformed_validation_result_returns_error_without_inference(bad_validat
 
 
 # ==================================================
-# TEST 2: TÍCH HỢP THẬT VỚI MODULE CỦA TV3
-# (dữ liệu theo test_documentation.md, mục 6.1 và 6.2, nhập dưới dạng chuỗi như từ UI)
+# TEST 2: KIỂM THỬ TÍCH HỢP (DỮ LIỆU ĐẦU VÀO DẠNG CHUỖI NHƯ TỪ UI)
 # ==================================================
 
 VALID_CASES = [
@@ -180,7 +178,7 @@ INVALID_CASES = [
     ("40", "inf"),       # TC24 khoảng cách Infinity
     ("", "10"),          # TC25 thiếu tốc độ
     ("40", ""),          # TC26 thiếu khoảng cách
-    # Bổ sung (mục 6.3)
+    # Các trường hợp biên và dữ liệu rỗng bổ sung
     ("nan", "10"),
     ("inf", "10"),
     ("40", "abc"),
