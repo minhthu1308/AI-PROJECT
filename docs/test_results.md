@@ -3,7 +3,7 @@
 
 ## 1. Thông tin chạy test
 
-- Lệnh: `python -m pytest -q`
+- Lệnh: `python -m pytest tests/ -v -ra`
 - Python: 3.13.5
 - pytest: 9.0.2
 - Bộ test: `tests/`
@@ -74,3 +74,13 @@ Không phát hiện lỗi trong phạm vi các chức năng và hợp đồng mo
 ## 6. Ghi chú
 
 Kết quả này phản ánh source tại thời điểm kiểm thử. Nếu TV3, TV4 hoặc TV5 thay đổi logic, cấu trúc dữ liệu hoặc module contract, cần chạy lại toàn bộ bộ test và cập nhật tài liệu kết quả.
+## 7. Minh chứng kiểm thử
+
+Kết quả kiểm thử được thực hiện bằng pytest.
+
+- Tổng số: 104 PASS, 0 FAIL, 0 SKIP.
+- Phiên bản Python: 3.13.5.
+- Phiên bản pytest: 9.0.2.
+- Commit kiểm thử: `<commit SHA>`.
+
+![Kết quả chạy pytest](evidence/pytest_results.png)
