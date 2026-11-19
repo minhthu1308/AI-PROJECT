@@ -1,16 +1,3 @@
-"""
-interface.py - Module giao diện (TV4)
-
-Trách nhiệm:
-    - Nhận tốc độ và khoảng cách từ người dùng.
-    - Gọi callback on_submit(speed, distance).
-    - Hiển thị status, message, recommendation (và rule_id, d_min nếu có).
-
-KHÔNG làm trong module này (theo module_contracts.md):
-    - Không tính D_min.
-    - Không tự xác định SAFE / WARNING / DANGER.
-    - Không tự validation dữ liệu (việc của TV3, được TV5 gọi).
-"""
 
 import tkinter as tk
 from tkinter import ttk
