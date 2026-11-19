@@ -2,7 +2,6 @@
 import tkinter as tk
 from tkinter import ttk
 
-# Chỉ là màu hiển thị theo trạng thái do hệ thống trả về, không phải logic suy luận.
 STATUS_COLORS = {
     "SAFE": "#2e7d32",
     "WARNING": "#ef6c00",
@@ -31,7 +30,6 @@ class CollisionWarningApp:
 
         self._build_ui()
 
-    # ------------------------------------------------------------------ UI
     def _build_ui(self):
         main = ttk.Frame(self.root, padding=16)
         main.pack(fill="both", expand=True)
@@ -42,7 +40,6 @@ class CollisionWarningApp:
             font=("Segoe UI", 14, "bold"),
         ).pack(pady=(0, 12))
 
-        # --- Khung nhập liệu
         form = ttk.LabelFrame(main, text="Dữ liệu đầu vào", padding=12)
         form.pack(fill="x")
         form.columnconfigure(1, weight=1)
@@ -60,7 +57,6 @@ class CollisionWarningApp:
         ttk.Button(buttons, text="Đánh giá", command=self.submit).pack(side="left", expand=True, fill="x", padx=(0, 4))
         ttk.Button(buttons, text="Xóa", command=self.clear).pack(side="left", expand=True, fill="x", padx=(4, 0))
 
-        # --- Khung kết quả
         result = ttk.LabelFrame(main, text="Kết quả", padding=12)
         result.pack(fill="both", expand=True)
 
@@ -87,23 +83,20 @@ class CollisionWarningApp:
         ttk.Label(details, text="Khoảng cách tham chiếu (d_min):", font=("Segoe UI", 9, "bold")).grid(row=1, column=0, sticky="w")
         ttk.Label(details, textvariable=self.d_min_var).grid(row=1, column=1, sticky="w", padx=(8, 0))
 
-        # Phím tắt
         self.root.bind("<Return>", lambda _e: self.submit())
         self.speed_entry.focus_set()
 
-    # ------------------------------------------------------------- Actions
     def submit(self):
-        """Lấy dữ liệu người dùng nhập và gọi callback on_submit(speed, distance).
+        """Gọi on_submit(speed, distance) với dữ liệu người dùng nhập.
 
-        Dữ liệu được truyền nguyên dạng (chỉ bỏ khoảng trắng đầu/cuối);
-        việc kiểm tra hợp lệ do validate_input() của TV3 đảm nhiệm.
+        Dữ liệu chỉ được bỏ khoảng trắng đầu/cuối, không kiểm tra hợp lệ.
         """
         speed = self.speed_var.get().strip()
         distance = self.distance_var.get().strip()
 
         try:
             result = self.on_submit(speed, distance)
-        except Exception as exc:  # lỗi bất ngờ từ các module phía sau
+        except Exception as exc:
             result = {
                 "status": "ERROR",
                 "message": f"Đã xảy ra lỗi khi xử lý: {exc}",
@@ -124,7 +117,7 @@ class CollisionWarningApp:
         self.speed_entry.focus_set()
 
     def show_result(self, result):
-        """Chỉ hiển thị dữ liệu nhận được, không tự suy luận lại."""
+        """Hiển thị kết quả nhận được lên giao diện."""
         if not isinstance(result, dict):
             result = {}
 
@@ -137,9 +130,7 @@ class CollisionWarningApp:
         self.recommendation_var.set(recommendation)
         self.status_label.config(bg=STATUS_COLORS.get(status, DEFAULT_COLOR))
 
-        # rule_id và d_min là trường bắt buộc khi evaluate_collision() trả kết quả.
-        # Với kết quả ERROR (dữ liệu không hợp lệ) có thể không có hai trường này
-        # nên hiển thị "—" thay vì báo lỗi.
+        # Kết quả ERROR có thể không có rule_id và d_min nên hiển thị "—".
         rule_id = result.get("rule_id")
         d_min = result.get("d_min")
         self.rule_id_var.set("—" if rule_id is None else str(rule_id))
@@ -149,10 +140,8 @@ class CollisionWarningApp:
 def run_app(on_submit):
     """Khởi chạy giao diện.
 
-    Args:
-        on_submit: callback on_submit(speed, distance) -> dict
-            (dict gồm 5 trường: status, message, recommendation, rule_id, d_min;
-            riêng kết quả ERROR có thể chỉ có 3 trường đầu).
+    on_submit(speed, distance) trả về dict gồm: status, message,
+    recommendation, rule_id, d_min.
     """
     root = tk.Tk()
     CollisionWarningApp(root, on_submit)
@@ -160,7 +149,7 @@ def run_app(on_submit):
 
 
 if __name__ == "__main__":
-    # Chạy thử độc lập giao diện bằng callback giả (không chứa logic suy luận thật).
+    # Chạy thử giao diện với dữ liệu giả.
     def _fake_on_submit(speed, distance):
         return {
             "status": "WARNING",
