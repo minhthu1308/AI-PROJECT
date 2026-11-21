@@ -17,11 +17,15 @@ TC15,80.01,69.99,70,DANGER,R02,Biên tốc độ,Ngay trên 80 km/h chuyển san
 TC16,100,80,70,WARNING,R03,Biên tốc độ,"Tại 100 km/h, thuộc khoảng 80<V≤100; D_min=70."
 TC17,100.01,99.99,100,DANGER,R02,Biên tốc độ,Ngay trên 100 km/h chuyển sang D_min=100.
 TC18,120,110,100,WARNING,R03,Biên tốc độ,Tại giới hạn trên 120 km/h; D_min=100.
-TC19,120.01,110,ERROR,ERROR,Validation,Biên tốc độ,Tốc độ vượt phạm vi mô phỏng.
-TC20,-1,10,ERROR,ERROR,Validation,Đầu vào không hợp lệ,Speed âm.
-TC21,40,-0.1,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance âm.
+TC19,120.01,110,N/A,ERROR,Validation,Biên tốc độ,Tốc độ vượt phạm vi mô phỏng.
+TC20,-1,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed âm.
+TC21,40,-0.1,N/A,ERROR,Validation,Đầu vào không hợp lệ,Distance âm.
 TC22,abc,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed không chuyển được sang float.
-TC23,40,NaN,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (NaN).
-TC24,40,Infinity,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (Infinity).
+TC23,40,NaN,N/A,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (NaN).
+TC24,40,Infinity,N/A,ERROR,Validation,Đầu vào không hợp lệ,Distance không hữu hạn (Infinity).
 TC25,,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed để trống.
-TC26,40,,23.333333,ERROR,Validation,Đầu vào không hợp lệ,Distance để trống.
+TC26,40,,N/A,ERROR,Validation,Đầu vào không hợp lệ,Distance để trống.
+TC27,NaN,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed không hữu hạn (NaN).
+TC28,Infinity,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed không hữu hạn (Infinity).
+TC29,40,abc,N/A,ERROR,Validation,Đầu vào không hợp lệ,Distance không chuyển được sang float.
+TC30, ,10,N/A,ERROR,Validation,Đầu vào không hợp lệ,Speed chỉ chứa khoảng trắng.

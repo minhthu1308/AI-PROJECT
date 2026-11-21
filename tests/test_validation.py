@@ -27,6 +27,8 @@ validate_input = validation_module.validate_input
 def test_valid_input(speed, distance):
     result = validate_input(speed, distance)
 
+    assert isinstance(result, dict)
+    assert {"valid", "speed", "distance", "error"}.issubset(result)
     assert result["valid"] is True
     assert result["speed"] == pytest.approx(float(speed))
     assert result["distance"] == pytest.approx(float(distance))
@@ -45,16 +47,25 @@ def test_valid_input(speed, distance):
     # Sai định dạng
     ("abc", 10),
     (40, "abc"),
+    (40, " "),
 
     # NaN và Infinity
     (float("nan"), 10),
+    ("NaN", 10),
     (40, float("nan")),
+    (40, "NaN"),
     (float("inf"), 10),
+    ("Infinity", 10),
     (40, float("inf")),
+    (40, "Infinity"),
 
     # Giá trị None
     (None, 10),
     (40, None),
+
+    # Boolean không được xem là số hợp lệ
+    (True, 10),
+    (40, False),
 
     # Giá trị rỗng
     ("", 10),
@@ -66,6 +77,8 @@ def test_valid_input(speed, distance):
 def test_invalid_input(speed, distance):
     result = validate_input(speed, distance)
 
+    assert isinstance(result, dict)
+    assert {"valid", "speed", "distance", "error"}.issubset(result)
     assert result["valid"] is False
     assert result["speed"] is None
     assert result["distance"] is None

@@ -225,7 +225,7 @@ Các trường dữ liệu:
 | TC12 | 60 | 45 | WARNING | R03 | 35 |
 | TC13 | 60 | 45.01 | SAFE | R04 | 35 |
 | TC14 | 80 | 55 | WARNING | R03 | 55 |
-| TC15 | v80.01 | 69.99 | DANGER | R02 | 70 |
+| TC15 | 80.01 | 69.99 | DANGER | R02 | 70 |
 | TC16 | 100 | 80 | WARNING | R03 | 70 |
 | TC17 | 100.01 | 99.99 | DANGER | R02 | 100 |
 | TC18 | 120 | 110 | WARNING | R03 | 100 | 
@@ -242,17 +242,16 @@ Các trường dữ liệu:
 | TC24 | 40 | Infinity | ERROR | Khoảng cách vô cực 
 | TC25 | Trống | 10 | ERROR | Thiếu tốc độ |
 | TC26 | 40 | Trống | ERROR | Thiếu khoảng cách |
+| TC27 | NaN | 10 | ERROR | Tốc độ NaN |
+| TC28 | Infinity | 10 | ERROR | Tốc độ vô cực |
+| TC29 | 40 | abc | ERROR | Khoảng cách không phải số |
+| TC30 | Chỉ khoảng trắng | 10 | ERROR | Tốc độ không hợp lệ |
 
-### 6.3. Kiểm thử bổ sung
+### 6.3. Các ca bổ sung trong test code
 
-Ngoài 26 trường hợp chính thức, TV2 có thể bổ sung các trường hợp:
+Ngoài 30 trường hợp trong CSV, `test_validation.py` kiểm tra thêm:
 
-- Tốc độ NaN.
-
-- Tốc độ Infinity.
-
-- Khoảng cách nhập chữ.
-
-- Dữ liệu đầu vào dạng chuỗi số hợp lệ, ví dụ "60" và "30".
-
-- Chuỗi rỗng "" ở từng trường.
+- Giá trị `None` ở từng trường.
+- Dữ liệu dạng chuỗi số hợp lệ, ví dụ "60" và "30".
+- Chuỗi "NaN" và "Infinity" ở tốc độ và khoảng cách.
+- Chuỗi chỉ chứa khoảng trắng ở khoảng cách.
