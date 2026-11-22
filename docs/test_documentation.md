@@ -8,7 +8,7 @@ Tài liệu này mô tả kế hoạch, phạm vi, dữ liệu và phương phá
 Mục tiêu của kiểm thử:
 - Kiểm tra tính hợp lệ của dữ liệu đầu vào.
 - Kiểm tra kết quả tính toán khoảng cách an toàn tối thiểu (D_min).
-- Kiểm tra khả năng phân loai mức độ nguy hiểm.
+- Kiểm tra khả năng phân loại mức độ nguy hiểm.
 - Kiểm tra mã luật IF-THEN được áp dụng.
 - Kiểm tra kết quả trả về giữa các module.
 - Phát hiện và ghi nhận lỗi trong quá trình phát triển. 
@@ -19,8 +19,8 @@ Mục tiêu của kiểm thử:
 Hàm được kiểm thử: `validate_input(speed, distance)`
 
 Các nội dung kiểm thử:
-- Kiểm tra dữ liệu đầu vào cso bị bỏ trống hay không
-- Kiểm tra khả năng chuyển đổi dữ liệu dang kiểu số
+- Kiểm tra dữ liệu đầu vào có bị bỏ trống hay không
+- Kiểm tra khả năng chuyển đổi dữ liệu dạng kiểu số
 - Kiểm tra giá trị âm
 - Kiểm tra NaN và Infinity
 - Kiểm tra cấu trúc kết quả trả về 
@@ -171,6 +171,7 @@ Với khoảng cách thực tế d, khoảng cách tối thiểu D_min và kho�
 Trường hợp đặc biệt:
 
 | Điều kiện | Kết quả | Mã luật |
+|---|---|---|
 | speed = 0 và distance = 0 | DANGER | R01 | 
 
 Với speed = 0 và distance > 0, D_min = 0; việc phân loại được thực hiện theo các ngưỡng R03 và R04.
@@ -179,7 +180,7 @@ Với speed = 0 và distance > 0, D_min = 0; việc phân loại được thực
 
 1. Kiểm tra dữ liệu đầu vào.
 
-2. Nếu dữ liệu không hợp lệ hoặc speed > 120: trả ERROR và dừng suy luận.
+2. Nếu dữ liệu không hợp lệ: trả ERROR và dừng suy luận.
 
 3. Kiểm tra R01.
 
@@ -212,12 +213,12 @@ Các trường dữ liệu:
 | Test ID | Speed | Distance | Expected Status | Expected Rule | D_min |
 |---|---|---|---|---|---|
 | TC01 | 0 | 0 | DANGER | R01 | 0 |
-| TC02 | 0 | 5 | WARNING | R03| 0 |
+| TC02 | 0 | 5 | WARNING | R03 | 0 |
 | TC03 | 0 | 10 | WARNING | R03 | 0 |
 | TC04 | 0 | 10.01 | SAFE | R04 | 0 |
 | TC05 | 30 | 17.49 | DANGER | R02 | 17.5 |
 | TC06 | 30 | 17.5 | WARNING | R03 | 17.5 |
-| TC07 | 30 | 27.5 | WARNING |  R03 | 17.5 |
+| TC07 | 30 | 27.5 | WARNING | R03 | 17.5 |
 | TC08 | 30 | 27.51 | SAFE | R04 | 17.5 |
 | TC09 | 59.99 | 34.99 | DANGER | R02 | 34.994167 |
 | TC10 | 60 | 34.99 | DANGER | R02 | 35 | 

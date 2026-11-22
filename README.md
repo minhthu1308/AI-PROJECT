@@ -53,14 +53,24 @@ Hệ thống sử dụng cơ chế suy luận dựa trên luật (Rule-Based Rea
     │       └── test_cases.csv
     │
     └── docs/
-       ├── module_contracts.md
-       ├── test_documentation.md
-       └── rule_specification.md
+        ├── module_contracts.md
+        ├── rule_specification.md
+        ├── test_documentation.md
+        ├── test_results.md
+        └── evidence/
+            ├── Screenshot 2026-11-20 011944.png
+            └── Screenshot 2026-11-20 012020.png
 ```
 
-Chi tiết về giao diện hàm, cấu trúc dữ liệu trả về và trách nhiệm của từng module được trình bày tại:
+Các tài liệu chi tiết của dự án được trình bày tại:
 
-- [Quy định phối hợp giữa các module](docs/module_contracts.md)
+## Tài liệu dự án
+
+- [Module Contracts](docs/module_contracts.md): Đặc tả chức năng và trách nhiệm của các module.
+- [Test Documentation](docs/test_documentation.md): Mô tả môi trường, phạm vi và các trường hợp kiểm thử.
+- [Test Results](docs/test_results.md): Tổng hợp kết quả thực hiện kiểm thử.
+- [Test Evidence](docs/evidence/): Thư mục chứa ảnh minh chứng quá trình kiểm thử.
+
 ## 6. Quy trình làm việc nhóm 
 - Làm việc theo nhánh riêng theo từng chức năng được phân công
 - Cập nhật mã nguồn mới nhất từ nhánh phát triển trước khi bắt đầu công việc
